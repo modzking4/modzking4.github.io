@@ -44,8 +44,6 @@
         
         });
     };
-
-
    /* Menu on Scrolldown
     * ------------------------------------------------------ */
     var ssMenuOnScrolldown = function() 
@@ -64,7 +62,6 @@
 
         });
     };
-
    /* OffCanvas Menu
     * ------------------------------------------------------ */
     var ssOffCanvas = function()
@@ -112,8 +109,6 @@
                 });
         });
     };
-
-
    /* photoswipe
     * ----------------------------------------------------- */
     var ssPhotoswipe = function() 
@@ -149,7 +144,6 @@
 
             items.push(item);
         });
-
         // bind click event
         $folioItems.each(function(i) 
         {
@@ -161,7 +155,6 @@
                     index: i,
                     showHideOpacity: true
                 }
-
                 // initialize PhotoSwipe
                 var lightBox = new PhotoSwipe($pswp, PhotoSwipeUI_Default, items, options);
                 lightBox.init();
@@ -169,8 +162,6 @@
 
         });
     };
-
-
    /* slick slider
     * ------------------------------------------------------ */
     var ssSlickSlider = function() 
@@ -186,51 +177,48 @@
                 autoplaySpeed: 1500
             });
     };
-
-
    /* Smooth Scrolling
     * ------------------------------------------------------ */
-    var ssSmoothScroll = function() {
-        
-        $('.smoothscroll').on('click', function (e) {
+    var ssSmoothScroll = function() 
+    {
+        $('.smoothscroll').on('click', function (e) 
+        {
             var target = this.hash,
             $target    = $(target);
             
                 e.preventDefault();
                 e.stopPropagation();
 
-            $('html, body').stop().animate({
+            $('html, body').stop().animate(
+            {
                 'scrollTop': $target.offset().top
-            }, cfg.scrollDuration, 'swing').promise().done(function () {
-
+            }, 
+            cfg.scrollDuration, 'swing').promise().done(function () 
+            {
                 // check if menu is open
-                if ($('body').hasClass('menu-is-open')) {
+                if ($('body').hasClass('menu-is-open')) 
+                {
                     $('.header-menu-toggle').trigger('click');
                 }
-
                 window.location.hash = target;
             });
         });
-
     };
-
-
    /* Alert Boxes
     * ------------------------------------------------------ */
-    var ssAlertBoxes = function() {
-
-        $('.alert-box').on('click', '.alert-box__close', function() {
+    var ssAlertBoxes = function() 
+    {
+        $('.alert-box').on('click', '.alert-box__close', function() 
+        {
             $(this).parent().fadeOut(500);
         }); 
-
     };
-
-
    /* Animate On Scroll
     * ------------------------------------------------------ */
-    var ssAOS = function() {
-        
-        AOS.init( {
+    var ssAOS = function() 
+    {
+        AOS.init( 
+        {
             offset: 200,
             duration: 600,
             easing: 'ease-in-sine',
@@ -238,14 +226,11 @@
             once: true,
             disable: 'mobile'
         });
-
     };
-
-
    /* Initialize
     * ------------------------------------------------------ */
-    (function clInit() {
-
+    (function clInit() 
+    {
         ssPreloader();
         ssMenuOnScrolldown();
         ssOffCanvas();
@@ -255,7 +240,5 @@
         ssSmoothScroll();
         ssAlertBoxes();
         ssAOS();
-
     })();
-
 })(jQuery);
