@@ -1018,18 +1018,20 @@ input[type="button"]:focus
   justify-content: center;
   font-size: 2rem;
 }
-a {
+/*a {
   text-decoration: none;
   color: #efefef;
   background: #161724;
   padding: 2.5rem 5rem;
   border-radius: 1.3rem;
   position: relative;
-}
-a:hover {
+}*/
+a:hover
+{
   animation: skew .4s;
 }
-a::after {
+a::after
+{
   content: "";
   display: block;
   width: 100%;
@@ -1042,7 +1044,8 @@ a::after {
   border-radius: 1.3rem;
   color: #efefef;
 }
-a::before {
+a::before 
+{
   content: "";
   display: block;
   width: 100%;
@@ -1054,10 +1057,12 @@ a::before {
   z-index: -1;
   border-radius: 1.3rem;
 }
-a:hover::after {
+a:hover::after 
+{
   animation: pink .4s 2;
 }
-a:hover::before {
+a:hover::before 
+{
   animation: blue .4s 2;
 }
 
@@ -1079,7 +1084,8 @@ a:hover::before {
   to { transform: translate(0) }
 }
 
-@keyframes skew {
+@keyframes skew
+{
   0% { transform: skew(0);}
   20% { transform: skew(-50deg); }
   40% { transform: skew(10deg); }
