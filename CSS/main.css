@@ -3774,7 +3774,8 @@ html.no-csstransitions .home-content__main
  * # contact
  *
  * ------------------------------------------------------------------- */
-.s-contact {
+.s-contact
+{
   padding-top: 16.2rem;
   padding-bottom: 21rem;
   background-color: #5e3080;
@@ -3783,11 +3784,13 @@ html.no-csstransitions .home-content__main
   position: relative;
 }
 
-.s-contact a {
+.s-contact a
+{
   color: #FFFFFF;
 }
 
-.s-contact .grid-overlay {
+.s-contact .grid-overlay 
+{
   border-right: 1px solid rgba(255, 255, 255, 0.12);
   border-left: 1px solid rgba(255, 255, 255, 0.12);
   z-index: 2;
@@ -3795,16 +3798,19 @@ html.no-csstransitions .home-content__main
 
 .s-contact .grid-overlay > div,
 .s-contact .grid-overlay::before,
-.s-contact .grid-overlay::after {
+.s-contact .grid-overlay::after 
+{
   background-color: rgba(255, 255, 255, 0.12);
 }
 
-.s-contact .subhead {
+.s-contact .subhead 
+{
   color: #2a1538;
 }
 
 .s-contact .section-header,
-.s-contact .contact-main {
+.s-contact .contact-main 
+{
   z-index: 3;
   position: relative;
 }
@@ -3845,153 +3851,155 @@ html.no-csstransitions .home-content__main
   margin: 4.2rem 0 0 0;
   font-size: 4.2rem;
 }
-
-.contact-social li {
+.contact-social li 
+{
   margin-right: 15px;
   padding-left: 0;
   display: inline-block;
 }
-
-.contact-social li a {
+.contact-social li a 
+{
   color: white;
   border: none !important;
 }
-
 .contact-social li a:hover,
-.contact-social li a:focus {
+.contact-social li a:focus 
+{
   color: #FFFFFF;
 }
-
-.contact-social li:last-child {
+.contact-social li:last-child 
+{
   margin: 0;
 }
-
 /* ------------------------------------------------------------------- 
  * responsive:
  * contact
  * ------------------------------------------------------------------- */
-@media only screen and (max-width:1200px) {
-  .contact-main {
+@media only screen and (max-width:1200px) 
+{
+  .contact-main 
+  {
     font-size: 3.1rem;
   }
-
-  .contact-email a {
+  .contact-email a 
+  {
     font-size: 7.6rem;
   }
-
 }
-
-@media only screen and (max-width:1000px) {
-  .s-contact {
+@media only screen and (max-width:1000px) 
+{
+  .s-contact 
+  {
     padding-top: 15rem;
     padding-bottom: 19.8rem;
   }
 
-  .contact-main {
+  .contact-main 
+  {
     font-size: 3rem;
   }
-
-  .contact-email a {
+  .contact-email a
+  {
     font-size: 7.2rem;
   }
-
 }
-
-@media only screen and (max-width:900px) {
-  .contact-main {
+@media only screen and (max-width:900px)
+{
+  .contact-main 
+  {
     font-size: 2.8rem;
   }
-
-  .contact-email a {
+  .contact-email a 
+  {
     font-size: 6.2rem;
   }
-
-  .contact-social {
+  .contact-social 
+  {
     font-size: 4rem;
   }
-
 }
-
-@media only screen and (max-width:800px) {
-  .contact-main {
+@media only screen and (max-width:800px)
+{
+  .contact-main 
+  {
     font-size: 2.6rem;
   }
-
-  .contact-email a {
+  .contact-email a 
+  {
     font-size: 5.5rem;
   }
-
-  .contact-social {
+  .contact-social
+  {
     font-size: 3.5rem;
   }
-
 }
-
-@media only screen and (max-width:700px) {
-  .contact-main {
+@media only screen and (max-width:700px) 
+{
+  .contact-main 
+  {
     font-size: 2.4rem;
   }
 
-  .contact-email a {
+  .contact-email a 
+  {
     font-size: 3.8rem;
   }
-
-  .contact-social {
+  .contact-social
+  {
     font-size: 3.2rem;
   }
-
 }
-
-@media only screen and (max-width:600px) {
-  .s-contact {
+@media only screen and (max-width:600px)
+{
+  .s-contact 
+  {
     padding-top: 12rem;
     padding-bottom: 13.2rem;
   }
-
-  .contact-main {
+  .contact-main
+  {
     font-size: 2.1rem;
     margin-top: 7.2rem;
   }
-
-  .contact-social {
+  .contact-social
+  {
     font-size: 3rem;
   }
-
 }
 
-@media only screen and (max-width:500px) {
-  .contact-main {
+@media only screen and (max-width:500px)
+{
+  .contact-main 
+  {
     font-size: 1.8rem;
   }
-
-  .contact-email a {
+  .contact-email a 
+  {
     font-size: 3rem;
   }
-
 }
-
-@media only screen and (max-width:400px) {
-  .contact-main {
+@media only screen and (max-width:400px)
+{
+  .contact-main 
+  {
     font-size: 1.6rem;
     margin-top: 4.5rem;
   }
-
-  .contact-email a {
+  .contact-email a
+  {
     font-size: 2.5rem;
   }
-
-  .contact-social {
+  .contact-social
+  {
     margin: 3rem 0 0 0;
     font-size: 2.4rem;
   }
-
 }
-
 /* ===================================================================
  * # footer
- *
  * ------------------------------------------------------------------- */
-footer {
+footer
+{
   padding-top: 9rem;
   padding-bottom: 6rem;
   color: rgba(255, 255, 255, 0.6);
@@ -4000,31 +4008,31 @@ footer {
   text-align: center;
   position: relative;
 }
-
-footer a {
+footer a
+{
   color: #FFFFFF;
 }
-
 /* ------------------------------------------------------------------- 
  * ## copyright
  * ------------------------------------------------------------------- */
-.ss-copyright span {
+.ss-copyright span 
+{
   font-size: 16px;
   display: inline-block;
 }
-
-.ss-copyright span::after {
+.ss-copyright span::after
+{
   content: "·";
   display: inline-block;
   padding: 0 1rem 0 1.2rem;
   color: white;
 }
-
-.ss-copyright span:last-child::after {
+.ss-copyright span:last-child::after
+{
   display: none;
 }
-
-.ss-go-top a {
+.ss-go-top a
+{
   color: #FFFFFF;
   background-color: #351b48;
   text-align: center;
@@ -4048,12 +4056,13 @@ footer a {
 /* ------------------------------------------------------------------- 
  * ## go top
  * ------------------------------------------------------------------- */
-.ss-go-top a::before {
+.ss-go-top a::before
+{
   content: "";
   display: block;
   height: 16px;
   width: 12px;
-  background-image: url(../Images/icons/icon-up.svg);
+  background-image: url(/modzking4.github.io/Images/icons/icon-up.svg);
   background-repeat: no-repeat;
   background-position: center center;
   background-size: contain;
@@ -4062,52 +4071,51 @@ footer a {
   left: 3.5rem;
   margin-top: -9px;
 }
-
 .ss-go-top a:hover,
-.ss-go-top a:focus {
+.ss-go-top a:focus 
+{
   background-color: #2d173d;
 }
-
 /* ------------------------------------------------------------------- 
  * responsive:
  * footer
  * ------------------------------------------------------------------- */
-@media only screen and (max-width:600px) {
-  .ss-copyright span {
+@media only screen and (max-width:600px)
+{
+  .ss-copyright span 
+  {
     display: block;
   }
-
-  .ss-copyright span::after {
+  .ss-copyright span::after 
+  {
     display: none;
   }
-
-  .ss-go-top a {
+  .ss-go-top a 
+  {
     font-size: 10px;
     height: 70px;
     line-height: 70px;
     top: -35px;
     padding: 0 3rem;
   }
-
-  .ss-go-top a::before {
+  .ss-go-top a::before
+  {
     display: none;
   }
-
 }
-
-@media only screen and (max-width:400px) {
-  .cl-copyright span {
+@media only screen and (max-width:400px)
+{
+  .cl-copyright span 
+  {
     font-size: 15px;
   }
-
-  .ss-go-top a {
+  .ss-go-top a
+  {
     height: 65px;
     line-height: 65px;
     top: -32.5px;
     padding: 0 3rem;
     padding: 0 2rem;
   }
-
 }
-
 /*# sourceMappingURL=main.css.map */
