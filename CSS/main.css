@@ -1016,7 +1016,6 @@ input[type="button"].btn--glitch
   color: #FFFFFF;
 }
 .btn.btn--glitch:hover,
-button.btn--glitch:hover,
 input[type="submit"].btn--glitch,
 input[type="reset"].btn--glitch,
 input[type="button"].btn--glitch
@@ -1024,13 +1023,10 @@ input[type="button"].btn--glitch
   animation: skew .4s;
 }
 .btn.btn--glitch::after,
-.btn.btn--glitch::after,
 input[type="submit"].btn--glitch,
 input[type="reset"].btn--glitch,
 input[type="button"].btn--glitch
 {
-  content: "";
-  display: block;
   position: absolute;
   background: #fa01fd;
   left: 0;
@@ -1039,7 +1035,6 @@ input[type="button"].btn--glitch
   border-radius: 1.3rem;
   color: #efefef;
 }
-.btn.btn--glitch::before,
 .btn.btn--glitch::before,
 input[type="submit"].btn--glitch,
 input[type="reset"].btn--glitch,
@@ -1055,14 +1050,12 @@ input[type="button"].btn--glitch
   border-radius: 1.3rem;
 }
 .btn.btn--glitch:hover::after,
-.btn.btn--glitch:hover::after,
 input[type="submit"].btn--glitch,
 input[type="reset"].btn--glitch,
 input[type="button"].btn--glitch
 {
   animation: pink .4s 2;
 }
-.btn.btn--glitch:hover::before,
 .btn.btn--glitch:hover::before,
 input[type="submit"].btn--glitch,
 input[type="reset"].btn--glitch,
