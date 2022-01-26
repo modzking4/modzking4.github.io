@@ -1,80 +1,86 @@
 /* =================================================================== 
- *
  *  Sublime v1.0 Vendor/Third Party CSS 
  *  06-10-2018
  *  ------------------------------------------------------------------
- *
  *  TOC:
  *  # animate on scroll
  *  # slick slider
  *  # lity
  *  # PhotoSwipe main CSS
  *  # PhotoSwipe Skin
- *
- * =================================================================== */
-
-
-/* ===================================================================
+ * ===================================================================
  * # animate on scroll 
  * https://michalsnik.github.io/aos/
  * ------------------------------------------------------------------- */
 [data-aos][data-aos][data-aos-duration='50'],
-body[data-aos-duration='50'] [data-aos] {
+body[data-aos-duration='50'] [data-aos] 
+{
   transition-duration: 50ms;
 }
 
 [data-aos][data-aos][data-aos-delay='50'],
-body[data-aos-delay='50'] [data-aos] {
+body[data-aos-delay='50'] [data-aos]
+{
   transition-delay: 0;
 }
 
 [data-aos][data-aos][data-aos-delay='50'].aos-animate,
-body[data-aos-delay='50'] [data-aos].aos-animate {
+body[data-aos-delay='50'] [data-aos].aos-animate 
+{
   transition-delay: 50ms;
 }
 
 [data-aos][data-aos][data-aos-duration='100'],
-body[data-aos-duration='100'] [data-aos] {
+body[data-aos-duration='100'] [data-aos] 
+{
   transition-duration: .1s;
 }
 
 [data-aos][data-aos][data-aos-delay='100'],
-body[data-aos-delay='100'] [data-aos] {
+body[data-aos-delay='100'] [data-aos] 
+{
   transition-delay: 0;
 }
 
 [data-aos][data-aos][data-aos-delay='100'].aos-animate,
-body[data-aos-delay='100'] [data-aos].aos-animate {
+body[data-aos-delay='100'] [data-aos].aos-animate 
+{
   transition-delay: .1s;
 }
 
 [data-aos][data-aos][data-aos-duration='150'],
-body[data-aos-duration='150'] [data-aos] {
+body[data-aos-duration='150'] [data-aos]
+{
   transition-duration: .15s;
 }
 
 [data-aos][data-aos][data-aos-delay='150'],
-body[data-aos-delay='150'] [data-aos] {
+body[data-aos-delay='150'] [data-aos]
+{
   transition-delay: 0;
 }
 
 [data-aos][data-aos][data-aos-delay='150'].aos-animate,
-body[data-aos-delay='150'] [data-aos].aos-animate {
+body[data-aos-delay='150'] [data-aos].aos-animate 
+{
   transition-delay: .15s;
 }
 
 [data-aos][data-aos][data-aos-duration='200'],
-body[data-aos-duration='200'] [data-aos] {
+body[data-aos-duration='200'] [data-aos] 
+{
   transition-duration: .2s;
 }
 
 [data-aos][data-aos][data-aos-delay='200'],
-body[data-aos-delay='200'] [data-aos] {
+body[data-aos-delay='200'] [data-aos] 
+{
   transition-delay: 0;
 }
 
 [data-aos][data-aos][data-aos-delay='200'].aos-animate,
-body[data-aos-delay='200'] [data-aos].aos-animate {
+body[data-aos-delay='200'] [data-aos].aos-animate 
+{
   transition-delay: .2s;
 }
 
@@ -2293,7 +2299,8 @@ a.pswp__share--download:hover {
 .pswp__caption,
 .pswp__top-bar,
 .pswp--has_mouse .pswp__button--arrow--left,
-.pswp--has_mouse .pswp__button--arrow--right {
+.pswp--has_mouse .pswp__button--arrow--right 
+{
   -webkit-backface-visibility: hidden;
   will-change: opacity;
   -webkit-transition: opacity 333ms cubic-bezier(0.4, 0, 0.22, 1);
@@ -2302,28 +2309,33 @@ a.pswp__share--download:hover {
 
 /* pswp--has_mouse class is added only when two subsequent mousemove events occur */
 .pswp--has_mouse .pswp__button--arrow--left,
-.pswp--has_mouse .pswp__button--arrow--right {
+.pswp--has_mouse .pswp__button--arrow--right 
+{
   visibility: visible;
 }
 
 .pswp__top-bar,
-.pswp__caption {
+.pswp__caption 
+{
   background-color: rgba(0, 0, 0, 0.5);
 }
 
 /* pswp__ui--fit class is added when main image "fits" between top bar and bottom bar (caption) */
 .pswp__ui--fit .pswp__top-bar,
-.pswp__ui--fit .pswp__caption {
+.pswp__ui--fit .pswp__caption 
+{
   background-color: rgba(0, 0, 0, 0.3);
 }
 
 /* pswp__ui--idle class is added when mouse isn't moving for several seconds (JS option timeToIdle) */
-.pswp__ui--idle .pswp__top-bar {
+.pswp__ui--idle .pswp__top-bar 
+{
   opacity: 0;
 }
 
 .pswp__ui--idle .pswp__button--arrow--left,
-.pswp__ui--idle .pswp__button--arrow--right {
+.pswp__ui--idle .pswp__button--arrow--right 
+{
   opacity: 0;
 }
 
