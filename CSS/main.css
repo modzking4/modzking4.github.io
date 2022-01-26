@@ -1002,6 +1002,92 @@ input[type="button"]:focus
   color: #000000;
   outline: 0;
 }
+/*
+* Glitch button
+*/
+.btn--Glitch
+{
+  width: 70%;
+  min-height: 60vh;
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 2rem;
+}
+a {
+  text-decoration: none;
+  color: #efefef;
+  background: #161724;
+  padding: 2.5rem 5rem;
+  border-radius: 1.3rem;
+  position: relative;
+}
+a:hover {
+  animation: skew .4s;
+}
+a::after {
+  content: "";
+  display: block;
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  background: #fa01fd;
+  left: 0;
+  bottom: 0;
+  z-index: -1;
+  border-radius: 1.3rem;
+  color: #efefef;
+}
+a::before {
+  content: "";
+  display: block;
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  background: #00f7f6;
+  left: 0;
+  top: 0;
+  z-index: -1;
+  border-radius: 1.3rem;
+}
+a:hover::after {
+  animation: pink .4s 2;
+}
+a:hover::before {
+  animation: blue .4s 2;
+}
+
+@keyframes blue {
+  0% { transform: translate(0) }
+  20% { transform: translate(-.6rem, .6rem) }
+  40% { transform: translate(-.6rem, -.6rem) }
+  60% { transform: translate(.6rem, -.6rem) }
+  80% { transform: translate(.6rem, -.6rem) }
+  to { transform: translate(0) }
+}
+
+@keyframes pink {
+  0% { transform: translate(0) }
+  20% { transform: translate(.6rem, .6rem)}
+  40% { transform: translate(.6rem, .6rem) }
+  60% { transform: translate(-.6rem, -.6rem) }
+  80% { transform: translate(-.6rem, .6rem) }
+  to { transform: translate(0) }
+}
+
+@keyframes skew {
+  0% { transform: skew(0);}
+  20% { transform: skew(-50deg); }
+  40% { transform: skew(10deg); }
+  60% { transform: skew(-20deg); }
+  80% { transform: skew(25deg); }
+  to { transform: skew(0); }
+}
+
 /* button primary
  * ------------------------------------------------- */
 .btn.btn--primary,
@@ -1024,7 +1110,8 @@ input[type="button"].btn--primary:hover,
 button.btn--primary:focus,
 input[type="submit"].btn--primary:focus,
 input[type="reset"].btn--primary:focus,
-input[type="button"].btn--primary:focus {
+input[type="button"].btn--primary:focus 
+{
   background: #6b3792;
   border-color: #6b3792;
 }
@@ -1032,46 +1119,52 @@ input[type="button"].btn--primary:focus {
 /* button modifiers
  * ------------------------------------------------- */
 .btn.full-width,
-button.full-width {
+button.full-width 
+{
   width: 100%;
   margin-right: 0;
 }
 
 .btn--medium,
-button.btn--medium {
+button.btn--medium 
+{
   height: 5.7rem !important;
   line-height: 5.3rem !important;
 }
 
 .btn--large,
-button.btn--large {
+button.btn--large 
+{
   height: 6rem !important;
   line-height: 5.6rem !important;
 }
 
 .btn--stroke,
-button.btn--stroke {
+button.btn--stroke 
+{
   background: transparent !important;
   border: 0.2rem solid #FFFFFF;
   color: #FFFFFF;
 }
-
 .btn--stroke:hover,
-button.btn--stroke:hover {
+button.btn--stroke:hover 
+{
   background: #FFFFFF !important;
   border: 0.2rem solid #FFFFFF;
   color: #000000;
 }
 
 .btn--pill,
-button.btn--pill {
+button.btn--pill
+{
   padding-left: 3rem !important;
   padding-right: 3rem !important;
   border-radius: 1000px !important;
 }
 
 button::-moz-focus-inner,
-input::-moz-focus-inner {
+input::-moz-focus-inner 
+{
   border: 0;
   padding: 0;
 }
@@ -1079,13 +1172,11 @@ input::-moz-focus-inner {
 
 /* =================================================================== 
  * # additional components
- *
- * ------------------------------------------------------------------- */
-
-/* ------------------------------------------------------------------- 
+ ------------------------------------------------------------------- 
  * ## alert box - (_alert-box.scss)
  * ------------------------------------------------------------------- */
-.alert-box {
+.alert-box 
+{
   padding: 2.1rem 4rem 2.1rem 3rem;
   position: relative;
   margin-bottom: 3rem;
@@ -1095,18 +1186,17 @@ input::-moz-focus-inner {
   font-size: 1.5rem;
   line-height: 1.6;
 }
-
-.alert-box__close {
+.alert-box__close
+{
   position: absolute;
   right: 1.8rem;
   top: 1.8rem;
   cursor: pointer;
 }
-
-.alert-box__close.fa {
+.alert-box__close.fa 
+{
   font-size: 12px;
 }
-
 .alert-box--error {
   background-color: #ffd1d2;
   color: #e65153;
