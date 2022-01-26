@@ -1002,9 +1002,35 @@ input[type="button"]:focus
   color: #000000;
   outline: 0;
 }
-/*
-* Glitch button
+/* button primary
+ * ------------------------------------------------- */
+.btn.btn--primary,
+button.btn--primary,
+input[type="submit"].btn--primary,
+input[type="reset"].btn--primary,
+input[type="button"].btn--primary 
+{
+  background: #793ea5;
+  border-color: #793ea5;
+  color: #FFFFFF;
+}
 
+.btn.btn--primary:hover,
+button.btn--primary:hover,
+input[type="submit"].btn--primary:hover,
+input[type="reset"].btn--primary:hover,
+input[type="button"].btn--primary:hover,
+.btn.btn--primary:focus,
+button.btn--primary:focus,
+input[type="submit"].btn--primary:focus,
+input[type="reset"].btn--primary:focus,
+input[type="button"].btn--primary:focus 
+{
+  background: #6b3792;
+  border-color: #6b3792;
+}
+
+/*Glitch button */
 .btn.btn--glitch,
 button.btn--glitch,
 input[type="submit"].btn--glitch,
@@ -1085,34 +1111,6 @@ input[type="button"].btn--glitch
   80% { transform: skew(25deg); }
   to { transform: skew(0); }
 } */
-/* button primary
- * ------------------------------------------------- */
-.btn.btn--primary,
-button.btn--primary,
-input[type="submit"].btn--primary,
-input[type="reset"].btn--primary,
-input[type="button"].btn--primary 
-{
-  background: #793ea5;
-  border-color: #793ea5;
-  color: #FFFFFF;
-}
-
-.btn.btn--primary:hover,
-button.btn--primary:hover,
-input[type="submit"].btn--primary:hover,
-input[type="reset"].btn--primary:hover,
-input[type="button"].btn--primary:hover,
-.btn.btn--primary:focus,
-button.btn--primary:focus,
-input[type="submit"].btn--primary:focus,
-input[type="reset"].btn--primary:focus,
-input[type="button"].btn--primary:focus 
-{
-  background: #6b3792;
-  border-color: #6b3792;
-}
-
 /* button modifiers
  * ------------------------------------------------- */
 .btn.full-width,

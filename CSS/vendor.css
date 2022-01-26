@@ -1753,12 +1753,9 @@ body[data-aos-easing=ease-in-out-quart] [data-aos] {
 
 /* ===================================================================
  * # PhotoSwipe Skin
- *
  * ------------------------------------------------------------------- */
-
 /*
   Contents:
-
   1. Buttons
   2. Share modal and links
   3. Index indicator ("1 of X" counter)
@@ -1820,7 +1817,7 @@ over element that should close gallery
 .pswp__button,
 .pswp__button--arrow--left:before,
 .pswp__button--arrow--right:before {
-  background: url(../images/photoswipe/default-skin.png) 0 0 no-repeat;
+  background: url(/modzking4.github.io/Images/photoswipe/default-skin.png) 0 0 no-repeat;
   background-size: 264px 88px;
   width: 44px;
   height: 44px;
@@ -1832,7 +1829,7 @@ over element that should close gallery
   .pswp--svg .pswp__button,
   .pswp--svg .pswp__button--arrow--left:before,
   .pswp--svg .pswp__button--arrow--right:before {
-    background-image: url(images/photoswipe/default-skin.svg);
+    background-image: url(/modzking4.github.io/Images/photoswipe/default-skin.svg);
   }
 
   .pswp--svg .pswp__button--arrow--left,
@@ -2141,7 +2138,7 @@ a.pswp__share--download:hover {
 .pswp__preloader--active .pswp__preloader__icn {
 
   /* We use .gif in browsers that don't support CSS animation */
-  background: url(..images/photoswipe/preloader.gif) 0 0 no-repeat;
+  background: url(/modzking4.github.io/Images/photoswipe/preloader.gif) 0 0 no-repeat;
 }
 
 .pswp--css_animation .pswp__preloader--active {
