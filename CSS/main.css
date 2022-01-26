@@ -1040,8 +1040,6 @@ input[type="submit"].btn--glitch,
 input[type="reset"].btn--glitch,
 input[type="button"].btn--glitch
 {
-  content: "";
-  display: block;
   position: absolute;
   background: #00f7f6;
   left: 0;
