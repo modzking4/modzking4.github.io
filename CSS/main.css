@@ -1004,7 +1004,7 @@ input[type="button"]:focus
 }
 /*
 * Glitch button
-*/
+
 .btn.btn--glitch,
 button.btn--glitch,
 input[type="submit"].btn--glitch,
@@ -1084,7 +1084,7 @@ input[type="button"].btn--glitch
   60% { transform: skew(-20deg); }
   80% { transform: skew(25deg); }
   to { transform: skew(0); }
-}
+} */
 /* button primary
  * ------------------------------------------------- */
 .btn.btn--primary,
