@@ -1260,7 +1260,7 @@ input::-moz-focus-inner {
 }
 
 .skill-bars li .progress {
-  background: #f82b02;
+  background: #6d1fa9;
   position: relative;
   height: 100%;
 }
@@ -1274,7 +1274,7 @@ input::-moz-focus-inner {
   color: #FFFFFF;
   font-size: 1.1rem;
   line-height: 1;
-  background: #f82b02;
+  background: #6d1fa9;
   padding: .6rem .6rem;
   border-radius: 3px;
 }
@@ -1286,7 +1286,7 @@ input::-moz-focus-inner {
   margin-left: -5px;
   border-right: 5px solid transparent;
   border-left: 5px solid transparent;
-  border-top: 5px solid #f82b02;
+  border-top: 5px solid #6d1fa9;
   content: "";
 }
 
