@@ -1,9 +1,7 @@
 /* =================================================================== 
- *
  *  Sublime v1.0 Main Stylesheet
  *  06-10-2018
  *  ------------------------------------------------------------------
- *
  *  TOC:
  *  # base style overrides
  *    ## links
@@ -53,20 +51,16 @@
  *
  * =================================================================== */
 
-
 /* ===================================================================
  * # base style overrides
- *
  * ------------------------------------------------------------------- */
 html {
   font-size: 10px;
 }
-
 @media only screen and (max-width:400px) {
   html {
     font-size: 9.411764705882353px;
   }
-
 }
 
 html,
@@ -109,7 +103,6 @@ a:active {
 
 /* ===================================================================
  * # typography & general theme styles
- * 
  * ------------------------------------------------------------------- */
 h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6 {
   font-family: "Montserrat", sans-serif;
@@ -193,26 +186,20 @@ p.lead {
   margin-bottom: 3.6rem;
   color: rgba(255, 255, 255, 0.2);
 }
-
 @media only screen and (max-width:1200px) {
   p.lead {
     font-size: 2.2rem;
   }
-
 }
-
 @media only screen and (max-width:1000px) {
   p.lead {
     font-size: 2.1rem;
   }
-
 }
-
 @media only screen and (max-width:800px) {
   p.lead {
     font-size: 2rem;
   }
-
 }
 
 em,
@@ -521,7 +508,6 @@ form,
 
 /* ===================================================================
  * # preloader - (_preloader-dots.scss)
- *
  * ------------------------------------------------------------------- */
 #preloader {
   position: fixed;
@@ -717,7 +703,6 @@ form,
 
 /* ===================================================================
  * # forms
- *
  * ------------------------------------------------------------------- */
 fieldset {
   border: none;
@@ -915,7 +900,6 @@ select:-webkit-autofill:focus {
 
 /* ===================================================================
  * # buttons
- *
  * ------------------------------------------------------------------- */
 .btn,
 button,
@@ -1035,9 +1019,7 @@ input::-moz-focus-inner {
 
 /* =================================================================== 
  * # additional components
- *
  * ------------------------------------------------------------------- */
-
 /* ------------------------------------------------------------------- 
  * ## alert box - (_alert-box.scss)
  * ------------------------------------------------------------------- */
@@ -1206,7 +1188,6 @@ input::-moz-focus-inner {
  *  </ul>
  *
  * Extend this object into your markup.
- *
  * --------------------------------------------------------------------- */
 .stats-tabs {
   padding: 0;
@@ -1273,9 +1254,9 @@ input::-moz-focus-inner {
   font-weight: 700;
   color: #FFFFFF;
   text-transform: uppercase;
-  letter-spacing: .2rem;
+  letter-spacing: .3rem;
   font-size: 1.4rem;
-  line-height: 2.4rem;
+  line-height: 3.4rem;
 }
 
 .skill-bars li .progress {
