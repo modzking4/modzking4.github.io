@@ -1403,7 +1403,7 @@ input::-moz-focus-inner {
 
 .project-bars li .progress
 {
-  background: #6d1fa9;
+  background: #f82b02;
   position: relative;
   height: 100%;
 }
@@ -1417,7 +1417,7 @@ input::-moz-focus-inner {
   color: #FFFFFF;
   font-size: 1.1rem;
   line-height: 1;
-  background: #6d1fa9;
+  background: #f82b02;
   padding: .6rem .6rem;
   border-radius: 3px;
 }
@@ -1429,7 +1429,7 @@ input::-moz-focus-inner {
   margin-left: -5px;
   border-right: 5px solid transparent;
   border-left: 5px solid transparent;
-  border-top: 5px solid #6d1fa9;
+  border-top: 5px solid #f82b02;
   content: "";
 }
 .project-bars li .percent5 
