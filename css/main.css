@@ -1403,7 +1403,7 @@ input::-moz-focus-inner {
 
 .project-bars li .progress
 {
-  background: #793ea5;
+  background: #6d1fa9;
   position: relative;
   height: 100%;
 }
@@ -1417,7 +1417,7 @@ input::-moz-focus-inner {
   color: #FFFFFF;
   font-size: 1.1rem;
   line-height: 1;
-  background: #793ea5;
+  background: #6d1fa9;
   padding: .6rem .6rem;
   border-radius: 3px;
 }
@@ -1429,7 +1429,7 @@ input::-moz-focus-inner {
   margin-left: -5px;
   border-right: 5px solid transparent;
   border-left: 5px solid transparent;
-  border-top: 5px solid #793ea5;
+  border-top: 5px solid #6d1fa9;
   content: "";
 }
 .project-bars li .percent5 
@@ -1524,7 +1524,6 @@ input::-moz-focus-inner {
 
 /* ===================================================================
  * # reusable and common theme styles
- *
  * ------------------------------------------------------------------- */
 body.menu-is-open {
   overflow: hidden;
