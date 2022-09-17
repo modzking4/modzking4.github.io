@@ -280,10 +280,7 @@ abbr {
   color: rgba(255, 255, 255, 0.2);
 }
 
-var,
-kbd,
-samp,
-code,
+var, kbd, samp, code,
 pre {
   font-family: Consolas, "Andale Mono", Courier, "Courier New", monospace;
 }
@@ -1297,77 +1294,63 @@ input::-moz-focus-inner {
 .skill-bars li .percent10 {
   width: 10%;
 }
-
 .skill-bars li .percent15 {
   width: 15%;
 }
-
 .skill-bars li .percent20 {
   width: 20%;
 }
-
 .skill-bars li .percent25 {
   width: 25%;
 }
-
 .skill-bars li .percent30 {
   width: 30%;
 }
-
 .skill-bars li .percent35 {
   width: 35%;
 }
-
 .skill-bars li .percent40 {
   width: 40%;
 }
-
 .skill-bars li .percent45 {
   width: 45%;
 }
-
 .skill-bars li .percent50 {
   width: 50%;
 }
-
 .skill-bars li .percent55 {
   width: 55%;
 }
-
 .skill-bars li .percent60 {
   width: 60%;
 }
-
 .skill-bars li .percent65 {
   width: 65%;
 }
-
 .skill-bars li .percent70 {
   width: 70%;
 }
-
 .skill-bars li .percent75 {
   width: 75%;
 }
-
 .skill-bars li .percent80 {
   width: 80%;
 }
-
 .skill-bars li .percent85 {
   width: 85%;
 }
-
 .skill-bars li .percent90 {
   width: 90%;
 }
-
 .skill-bars li .percent95 {
   width: 95%;
 }
-
 .skill-bars li .percent100 {
   width: 100%;
+}
+#lowP
+{
+  top: -55px;
 }
 /*
 * Project completion bars
