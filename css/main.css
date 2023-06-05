@@ -1495,8 +1495,8 @@ body.menu-is-open {
   padding: 3.6rem 3rem 3.6rem 6rem;
   height: 100%;
   width: 30%;
-  background: rgba(0, 0, 0, 0.25);/* #0C0C0C; */
-  color: rgba(255, 255, 255, 0.25);
+  background: rgba(0, 0, 0, 1);/* #0C0C0C; */
+  color: rgba(255, 255, 255, 1);
   overflow-y: auto;
   overflow-x: hidden;
   position: fixed;
@@ -1826,7 +1826,6 @@ body.menu-is-open {
   }
 
 }
-
 
 /* ===================================================================
  * # home
