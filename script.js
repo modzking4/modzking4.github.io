@@ -7,87 +7,84 @@
 document.getElementById('year').textContent = new Date().getFullYear();
 
 /* ---------------------------------------------------------------
-   WebGL backdrop — wireframe tunnel the camera flies through,
-   position driven by scroll progress.
+   WebGL backdrop — a drafting-grid corridor the camera flies
+   through as the page scrolls. Floor/ceiling grids sit well above
+   and below the text column so linework never crosses reading
+   content; a few floating wireframe nodes carry the depth cue.
 --------------------------------------------------------------- */
 (function initScene(){
   const canvas = document.getElementById('webgl-bg');
+  const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
   if (!window.THREE || !canvas) return;
 
-  const renderer = new THREE.WebGLRenderer({ canvas, antialias: true, alpha: true });
-  renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+  let renderer;
+  try {
+    renderer = new THREE.WebGLRenderer({ canvas, antialias: true, alpha: true });
+  } catch (err) {
+    return;
+  }
+  renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, 2));
   renderer.setSize(window.innerWidth, window.innerHeight);
+  renderer.setClearColor(0x000000, 0);
 
   const scene = new THREE.Scene();
-  const camera = new THREE.PerspectiveCamera(60, window.innerWidth / window.innerHeight, 0.1, 400);
-  camera.position.z = 10;
+  const camera = new THREE.PerspectiveCamera(58, window.innerWidth / window.innerHeight, 0.1, 800);
+  camera.position.set(0, 2, 30);
 
-  const blue = new THREE.Color(0x7DC1F2);
-  const amber = new THREE.Color(0xFFB454);
+  const LINE_COLOR = 0x2C4C72;
+  const AMBER = 0xFFB454;
+  const BLUE = 0x7DC1F2;
+  const CORRIDOR_DEPTH = 360;
 
-  // ring tunnel
-  const RING_COUNT = 40;
-  const RING_SPACING = 12;
-  const rings = [];
-  const ringGeo = new THREE.TorusGeometry(6, 0.015, 8, 40);
+  // floor + ceiling grids, kept well clear of the text column vertically
+  const floor = new THREE.GridHelper(180, 24, LINE_COLOR, LINE_COLOR);
+  floor.position.y = -16;
+  floor.position.z = -CORRIDOR_DEPTH / 2;
+  floor.material.transparent = true;
+  floor.material.opacity = 0.5;
+  scene.add(floor);
 
-  for (let i = 0; i < RING_COUNT; i++){
-    const isCheckpoint = i % 6 === 0;
-    const mat = new THREE.MeshBasicMaterial({
-      color: isCheckpoint ? amber : blue,
-      transparent: true,
-      opacity: isCheckpoint ? 0.55 : 0.22,
-      wireframe: true
-    });
-    const ring = new THREE.Mesh(ringGeo, mat);
-    ring.position.z = -i * RING_SPACING;
-    ring.rotation.x = Math.PI / 2;
-    scene.add(ring);
-    rings.push(ring);
+  const ceiling = floor.clone();
+  ceiling.position.y = 16;
+  scene.add(ceiling);
+
+  // floating wireframe nodes drifting along the corridor
+  const nodeGeo = new THREE.IcosahedronGeometry(1.3, 0);
+  const nodes = [];
+  const NODE_COUNT = 18;
+  for (let i = 0; i < NODE_COUNT; i++){
+    const color = i % 2 === 0 ? AMBER : BLUE;
+    const mat = new THREE.MeshBasicMaterial({ color, wireframe: true, transparent: true, opacity: 0.6 });
+    const mesh = new THREE.Mesh(nodeGeo, mat);
+    mesh.position.set(
+      (Math.random() - 0.5) * 34,
+      (Math.random() < 0.5 ? -1 : 1) * (7 + Math.random() * 8),
+      -Math.random() * CORRIDOR_DEPTH
+    );
+    mesh.scale.setScalar(0.6 + Math.random() * 1.1);
+    mesh.userData.spin = (Math.random() - 0.5) * 0.01;
+    scene.add(mesh);
+    nodes.push(mesh);
   }
 
-  // particle field for depth
-  const PARTICLE_COUNT = 700;
-  const positions = new Float32Array(PARTICLE_COUNT * 3);
-  for (let i = 0; i < PARTICLE_COUNT; i++){
-    positions[i * 3] = (Math.random() - 0.5) * 40;
-    positions[i * 3 + 1] = (Math.random() - 0.5) * 40;
-    positions[i * 3 + 2] = -Math.random() * RING_COUNT * RING_SPACING;
-  }
-  const particleGeo = new THREE.BufferGeometry();
-  particleGeo.setAttribute('position', new THREE.BufferAttribute(positions, 3));
-  const particleMat = new THREE.PointsMaterial({ color: 0x7DC1F2, size: 0.05, transparent: true, opacity: 0.5 });
-  const particles = new THREE.Points(particleGeo, particleMat);
-  scene.add(particles);
-
-  // central spine geometry — an icosahedron drifting near the camera path
-  const core = new THREE.Mesh(
-    new THREE.IcosahedronGeometry(1.6, 0),
-    new THREE.MeshBasicMaterial({ color: 0xFFB454, wireframe: true, transparent: true, opacity: 0.35 })
-  );
-  core.position.z = -RING_SPACING * 3;
-  scene.add(core);
-
-  let targetZ = camera.position.z;
-  let currentZ = camera.position.z;
   let mouseX = 0, mouseY = 0;
+  window.addEventListener('mousemove', (e) => {
+    mouseX = (e.clientX / window.innerWidth) - 0.5;
+    mouseY = (e.clientY / window.innerHeight) - 0.5;
+  });
 
   function scrollProgress(){
     const max = document.documentElement.scrollHeight - window.innerHeight;
     return max > 0 ? window.scrollY / max : 0;
   }
 
+  let targetZ = camera.position.z;
   function onScroll(){
     const p = scrollProgress();
-    targetZ = 10 - p * (RING_COUNT * RING_SPACING - 20);
+    targetZ = 30 - p * (CORRIDOR_DEPTH - 30);
   }
   window.addEventListener('scroll', onScroll, { passive: true });
   onScroll();
-
-  window.addEventListener('mousemove', (e) => {
-    mouseX = (e.clientX / window.innerWidth) - 0.5;
-    mouseY = (e.clientY / window.innerHeight) - 0.5;
-  });
 
   window.addEventListener('resize', () => {
     camera.aspect = window.innerWidth / window.innerHeight;
@@ -95,24 +92,26 @@ document.getElementById('year').textContent = new Date().getFullYear();
     renderer.setSize(window.innerWidth, window.innerHeight);
   });
 
-  const clock = new THREE.Clock();
+  let camZ = camera.position.z;
+  let camRotX = 0, camRotY = 0;
 
   function animate(){
     requestAnimationFrame(animate);
-    const dt = clock.getDelta();
 
-    currentZ += (targetZ - camera.position.z) * 0.06;
-    camera.position.z += (targetZ - camera.position.z) * 0.06;
-    camera.position.x += (mouseX * 1.2 - camera.position.x) * 0.04;
-    camera.position.y += (-mouseY * 1.2 - camera.position.y) * 0.04;
-    camera.lookAt(0, 0, camera.position.z - 10);
+    camZ += (targetZ - camZ) * 0.06;
+    camera.position.z = camZ;
 
-    rings.forEach((ring, i) => {
-      ring.rotation.z += 0.0015 * (i % 3 === 0 ? 1 : -1);
+    if (!reduceMotion){
+      camRotX += ((mouseY * -0.1) - camRotX) * 0.04;
+      camRotY += ((mouseX * 0.14) - camRotY) * 0.04;
+    }
+    camera.rotation.x = camRotX;
+    camera.rotation.y = camRotY;
+
+    nodes.forEach((n) => {
+      n.rotation.x += n.userData.spin;
+      n.rotation.y += n.userData.spin * 1.3;
     });
-    core.rotation.x += dt * 0.15;
-    core.rotation.y += dt * 0.2;
-    particles.rotation.y += dt * 0.01;
 
     renderer.render(scene, camera);
   }
