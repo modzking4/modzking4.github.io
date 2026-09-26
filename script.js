@@ -119,6 +119,149 @@ document.getElementById('year').textContent = new Date().getFullYear();
 })();
 
 /* ---------------------------------------------------------------
+   Sync-gate demo — a small standalone scene showing the foreground
+   and background sync coordinators queuing at a shared gate before
+   reaching the data store (see the Fieldwork case study).
+--------------------------------------------------------------- */
+(function initGateWidget(){
+  const canvas = document.getElementById('gateCanvas');
+  const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  if (!canvas || !window.THREE) return;
+
+  let renderer;
+  try {
+    renderer = new THREE.WebGLRenderer({ canvas, alpha: true, antialias: true });
+  } catch (err) {
+    return;
+  }
+  renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, 2));
+
+  const scene = new THREE.Scene();
+  const camera = new THREE.PerspectiveCamera(42, 1, 0.1, 100);
+  camera.position.set(0, 1.6, 9);
+  camera.lookAt(0, 0, 0);
+
+  const AMBER = 0xFFB454, BLUE = 0x7DC1F2, GOOD = 0x7ED9A6, LINE = 0x2C4C72;
+  const START_X = -4.2, GATE_X = 0.6, END_X = 4.6;
+
+  [0.9, -0.9].forEach((y) => {
+    const geo = new THREE.BufferGeometry().setFromPoints([
+      new THREE.Vector3(START_X, y, 0),
+      new THREE.Vector3(END_X, y, 0)
+    ]);
+    const mat = new THREE.LineBasicMaterial({ color: LINE, transparent: true, opacity: 0.6 });
+    scene.add(new THREE.Line(geo, mat));
+  });
+
+  const gateGeo = new THREE.PlaneGeometry(0.06, 2.4);
+  const gateMat = new THREE.MeshBasicMaterial({ color: GOOD, transparent: true, opacity: 0.18, side: THREE.DoubleSide });
+  const gatePlane = new THREE.Mesh(gateGeo, gateMat);
+  gatePlane.position.set(GATE_X, 0, 0);
+  scene.add(gatePlane);
+  const gateEdges = new THREE.LineSegments(
+    new THREE.EdgesGeometry(gateGeo),
+    new THREE.LineBasicMaterial({ color: GOOD })
+  );
+  gateEdges.position.copy(gatePlane.position);
+  scene.add(gateEdges);
+
+  const store = new THREE.Mesh(
+    new THREE.BoxGeometry(0.9, 0.9, 0.9),
+    new THREE.MeshBasicMaterial({ color: LINE, wireframe: true })
+  );
+  store.position.set(END_X + 0.4, 0, 0);
+  scene.add(store);
+
+  function makeToken(color){
+    const mesh = new THREE.Mesh(
+      new THREE.IcosahedronGeometry(0.32, 0),
+      new THREE.MeshBasicMaterial({ color, wireframe: true })
+    );
+    const glow = new THREE.Mesh(
+      new THREE.SphereGeometry(0.42, 12, 12),
+      new THREE.MeshBasicMaterial({ color, transparent: true, opacity: 0.15 })
+    );
+    mesh.add(glow);
+    return mesh;
+  }
+
+  const tokenFg = makeToken(AMBER);
+  tokenFg.position.set(START_X, 0.9, 0);
+  scene.add(tokenFg);
+
+  const tokenBg = makeToken(BLUE);
+  tokenBg.position.set(START_X, -0.9, 0);
+  scene.add(tokenBg);
+
+  function resize(){
+    const w = canvas.clientWidth, h = canvas.clientHeight;
+    if (!w || !h) return;
+    camera.aspect = w / h;
+    camera.updateProjectionMatrix();
+    renderer.setSize(w, h, false);
+  }
+  window.addEventListener('resize', resize);
+  resize();
+
+  let visible = true;
+  if ('IntersectionObserver' in window){
+    const io = new IntersectionObserver((entries) => { visible = entries[0].isIntersecting; }, { threshold: 0.05 });
+    io.observe(canvas);
+  }
+
+  let fgX = START_X, bgX = START_X, bgWaiting = false, t0 = null;
+
+  if (reduceMotion){
+    tokenFg.position.x = 2;
+    tokenBg.position.x = GATE_X;
+    renderer.render(scene, camera);
+    return;
+  }
+
+  function frame(ts){
+    requestAnimationFrame(frame);
+    if (!visible){ t0 = ts; return; }
+    if (t0 === null) t0 = ts;
+    const dt = Math.min(32, ts - t0);
+    t0 = ts;
+    const span = END_X - START_X;
+    const speed = span / 2600;
+
+    fgX += dt * speed;
+    if (fgX > END_X) fgX = START_X;
+
+    const fgNearGate = Math.abs(fgX - GATE_X) < 0.9;
+    const gateHold = GATE_X - 0.15;
+
+    if (bgX < gateHold){
+      bgX += dt * speed * 0.8;
+      if (bgX >= gateHold){ bgX = gateHold; bgWaiting = true; }
+    } else if (bgWaiting){
+      if (!fgNearGate) bgWaiting = false;
+    } else {
+      bgX += dt * speed * 0.8;
+      if (bgX > END_X) bgX = START_X;
+    }
+
+    tokenFg.position.x = fgX;
+    tokenFg.rotation.y += 0.02;
+    tokenFg.rotation.x += 0.015;
+
+    tokenBg.position.x = bgX;
+    tokenBg.rotation.y += 0.02;
+    tokenBg.rotation.x += 0.015;
+
+    const pulse = bgWaiting ? 0.35 + Math.sin(ts * 0.006) * 0.12 : 0.18;
+    gateMat.opacity = pulse;
+    gateMat.color.set(bgWaiting ? AMBER : GOOD);
+    gateEdges.material.color.set(bgWaiting ? AMBER : GOOD);
+
+    renderer.render(scene, camera);
+  }
+  requestAnimationFrame(frame);
+})();
+
+/* ---------------------------------------------------------------
    Custom cursor
 --------------------------------------------------------------- */
 (function initCursor(){

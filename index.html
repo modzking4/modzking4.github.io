@@ -2,8 +2,8 @@
 <html lang="en">
 <head>
 <meta charset="utf-8">
-<title>Liam Ramsden — Software Engineer</title>
-<meta name="description" content="Liam Ramsden — software engineer specialising in mobile and web development, based in Manchester, UK.">
+<title>Liam Ramsden — Web &amp; Mobile Developer</title>
+<meta name="description" content="Liam Ramsden — web developer shipping front-end and back-end products, plus native iOS/Android apps end-to-end. Based in Manchester, UK.">
 <meta name="author" content="Liam Ramsden">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 
@@ -60,7 +60,10 @@
         <span>Liam</span>
         <span>Ramsden</span>
       </h1>
-      <p class="cover-role reveal">Software Engineer <span class="cover-role__div">·</span> Mobile &amp; Web</p>
+      <p class="cover-role reveal">Web Developer <span class="cover-role__div">·</span> Mobile Engineer</p>
+      <p class="cover-thesis reveal">Front-end and back-end web by day. Alongside it, I design, build and ship native
+      iOS/Android apps end-to-end — including a production field-operations platform used
+      daily by trades teams on site.</p>
       <p class="cover-loc reveal mono">Manchester, UK — 53.4808° N, 2.2426° W</p>
       <div class="cover-cta reveal">
         <a href="#fieldwork" class="btn btn--primary magnetic">View Fieldwork</a>
@@ -78,16 +81,18 @@
     <div class="sheet-frame">
       <p class="kicker reveal">Sheet 01 — Profile</p>
       <h2 class="sheet-heading reveal">
-        Tech enthusiast by heart, software engineer by trade — I build mobile apps and
-        front-end web products end-to-end, from client brief to shipped product.
+        Web developer by day. The rest of the time, I'm shipping native mobile apps
+        end-to-end — architecture, sync logic, and the App Store submission itself.
       </h2>
       <div class="profile-grid">
         <p class="profile-lead reveal">
-          I design and build websites and applications from first spec to launch, working
-          directly with clients so what gets shipped actually matches what they needed —
-          not just what was asked for on day one. My background spans native iOS (Swift /
-          SwiftUI), Android, and front-end web, with production experience writing control-logic
-          software for industrial systems.
+          Day to day I build front-end and back-end web products. Alongside that I've been the
+          sole iOS/Android developer on a production field-operations platform for the
+          construction trade — no hand-off between "the mobile team" and "the backend team,"
+          just me designing the client-side architecture, writing the sync logic that keeps a
+          site engineer's phone correct when the signal drops, and shipping the result to both
+          app stores myself. That app is live and in daily use. I'm currently building a couple
+          more mobile apps alongside the day job.
         </p>
         <dl class="profile-facts reveal">
           <div>
@@ -95,12 +100,12 @@
             <dd>Manchester, UK</dd>
           </div>
           <div>
-            <dt>Focus</dt>
-            <dd>Mobile · Front-end Web · Control Systems</dd>
+            <dt>Day job</dt>
+            <dd>Web Development · Front &amp; Back-end</dd>
           </div>
           <div>
-            <dt>Education</dt>
-            <dd>University of Manchester</dd>
+            <dt>Also shipping</dt>
+            <dd>Native iOS &amp; Android</dd>
           </div>
           <div>
             <dt>Available for</dt>
@@ -115,34 +120,57 @@
   <section id="capabilities" class="sheet sheet--capabilities" data-sheet="02" data-title="Capabilities">
     <div class="sheet-frame">
       <p class="kicker reveal">Sheet 02 — Capabilities</p>
-      <h2 class="sheet-heading reveal">What I actually build with, day to day.</h2>
+      <h2 class="sheet-heading reveal">Legend — no percentages, just what each toolset is building.</h2>
 
       <div class="cap-grid">
         <div class="cap-group reveal">
+          <h3 class="cap-group__title mono">Front-end &amp; Back-end Web</h3>
+          <p class="cap-note">The day job.</p>
+          <ul class="skill-tags">
+            <li>HTML5</li><li>CSS3</li><li>JavaScript</li><li>Python</li><li>MySQL</li><li>C#</li>
+          </ul>
+        </div>
+        <div class="cap-group reveal">
           <h3 class="cap-group__title mono">Mobile — Production</h3>
+          <p class="cap-note">A live field-operations platform, plus more apps in progress.</p>
           <ul class="skill-tags">
-            <li>Swift</li><li>SwiftUI</li><li>UIKit</li><li>Kotlin / Android</li>
-          </ul>
-          <p class="cap-note">Where most of my current shipping work lives — native iOS and Android apps used daily by real users.</p>
-        </div>
-        <div class="cap-group reveal">
-          <h3 class="cap-group__title mono">Front-end Web</h3>
-          <ul class="skill-tags">
-            <li>HTML5</li><li>CSS3</li><li>JavaScript</li><li>jQuery</li>
+            <li>Swift</li><li>SwiftUI</li><li>UIKit</li><li>Core Data</li><li>Kotlin</li><li>Android</li>
           </ul>
         </div>
         <div class="cap-group reveal">
-          <h3 class="cap-group__title mono">Backend &amp; Data</h3>
+          <h3 class="cap-group__title mono">Systems &amp; Sync</h3>
+          <p class="cap-note">The unglamorous part that has to be right.</p>
           <ul class="skill-tags">
-            <li>Python</li><li>MySQL</li><li>C#</li>
+            <li>Offline-first architecture</li><li>Background sync coordination</li><li>Concurrency debugging</li>
           </ul>
         </div>
         <div class="cap-group reveal">
           <h3 class="cap-group__title mono">Control Systems</h3>
+          <p class="cap-note">Earlier production experience — industrial telecoms &amp; data-centre cooling units.</p>
           <ul class="skill-tags">
             <li>Logic Gates</li><li>PLC Logic</li>
           </ul>
-          <p class="cap-note">Production control software for industrial telecoms &amp; data-centre cooling units — my day job's technical core.</p>
+        </div>
+      </div>
+
+      <div class="fieldnote reveal">
+        <div class="fieldnote-text">
+          <p class="kicker" style="margin-bottom:10px;">Live from the field</p>
+          <h3 class="fieldnote-title">A sync gate, in miniature</h3>
+          <p class="fieldnote-desc">Two sync coordinators — one triggered from the app in the
+          foreground, one running as a background task — used to write to the same local
+          database at once. It only ever showed up on devices with real data to collide over.
+          The fix: a shared gate both coordinators pass through before touching the store, so
+          one waits its turn instead of racing. The full story is in the Fieldwork case study
+          below — this is the same idea, animated, with far fewer moving parts.</p>
+        </div>
+        <div class="gate-demo">
+          <canvas id="gateCanvas"></canvas>
+          <div class="gate-legend mono">
+            <span><i class="gate-dot gate-dot--fg"></i>Foreground sync</span>
+            <span><i class="gate-dot gate-dot--bg"></i>Background sync</span>
+            <span><i class="gate-dot gate-dot--gate"></i>Shared gate</span>
+          </div>
         </div>
       </div>
     </div>
@@ -159,31 +187,43 @@
         <article class="case reveal">
           <div class="case__index mono">A</div>
           <div class="case__body">
-            <p class="case__cat mono">Case Study — Anonymised, NDA</p>
+            <p class="case__cat mono">Case Study — Anonymised, NDA · In production</p>
             <h3 class="case__title">Field-operations platform</h3>
-            <div class="case__todo">
-              <p><strong>Needs your input:</strong> drop in the real problem → diagnosis → fix
-              narrative and any metrics you can share (kept anonymised, no product or client
-              names). Placeholder shown below — replace before this goes live.</p>
-            </div>
+            <p class="case__role mono">iOS + Android · construction &amp; trades industry · sole developer, end to end</p>
+
+            <ul class="case__stats case__stats--top">
+              <li><strong>500k+</strong><span>records reconciled per full sync</span></li>
+              <li><strong>2</strong><span>platforms, one architecture</span></li>
+              <li><strong>0</strong><span>separate mobile team — solo, end to end</span></li>
+            </ul>
+
             <div class="case__cols">
               <div>
                 <h4 class="mono">Problem</h4>
-                <p>[ Describe the operational problem the platform faced. ]</p>
+                <p>Two independent sync processes — one triggered from the app in the
+                foreground, one running as a background task — could write to the same local
+                database at once. It only surfaced on devices with enough real data to collide
+                over, so it passed QA clean and then corrupted state in the field.</p>
               </div>
               <div>
                 <h4 class="mono">Diagnosis</h4>
-                <p>[ What you found investigating it, and why it was happening. ]</p>
+                <p>Reproduced on-device with concurrency debugging enabled, not in the
+                simulator. Traced it to two coordinators sharing the same sync managers with no
+                mutual exclusion between them — confirmed by forcing a foreground/background
+                overlap and watching the crash logs line up.</p>
               </div>
               <div>
                 <h4 class="mono">Fix</h4>
-                <p>[ What you built / changed, and the architecture involved. ]</p>
+                <p>A shared gate both coordinators pass through before touching the store, with
+                priority levels so a full re-sync can still preempt routine background work
+                instead of queuing behind it. Verified clean on device across cold-start and
+                background-to-foreground transitions.</p>
               </div>
             </div>
-            <ul class="case__stats">
-              <li><strong>—</strong><span>metric</span></li>
-              <li><strong>—</strong><span>metric</span></li>
-              <li><strong>—</strong><span>metric</span></li>
+
+            <ul class="skill-tags case__chips">
+              <li>Core Data / Room</li><li>Swift &amp; Kotlin Concurrency</li>
+              <li>Offline-first sync</li><li>WebSocket chat</li><li>TUS chunked uploads</li>
             </ul>
           </div>
         </article>
@@ -193,12 +233,13 @@
           <div class="case__body">
             <p class="case__cat mono">Personal Project</p>
             <h3 class="case__title">Bug Defense</h3>
-            <div class="case__todo">
-              <p><strong>Needs your input:</strong> a couple of lines on what Bug Defense is,
-              the stack, and what it does — placeholder shown below.</p>
-            </div>
-            <p class="case__desc">[ One or two sentences describing Bug Defense — what problem
-            it solves, the platform (iOS / Android / web), and the stack it's built on. ]</p>
+            <p class="case__role mono">iOS · Swift, SwiftUI, SpriteKit</p>
+            <p class="case__desc">A tower-defense game in the spirit of Bloons TD, themed around
+            IT infrastructure fighting off bugs. Towers are upgradeable kit along a defended
+            path; the excuse to build it was learning SpriteKit properly outside of work hours.</p>
+            <ul class="skill-tags case__chips">
+              <li>SpriteKit</li><li>Game architecture</li>
+            </ul>
           </div>
         </article>
 
@@ -237,27 +278,41 @@
   <section id="method" class="sheet sheet--method" data-sheet="04" data-title="Method">
     <div class="sheet-frame">
       <p class="kicker reveal">Sheet 04 — Method</p>
-      <h2 class="sheet-heading reveal">How I work, solo, from brief to live.</h2>
+      <h2 class="sheet-heading reveal">How I work.</h2>
       <ol class="method-list">
         <li class="method-item reveal">
           <span class="method-item__num mono">01</span>
           <div>
-            <h3>Understand the problem</h3>
-            <p>Before writing anything, I get clear on what the app or site actually needs to do for the people using it day to day — not just the feature list I've been handed.</p>
+            <h3>Solo, end to end</h3>
+            <p>When there's no separate mobile team to hand a spec to, I own it end to end —
+            client-side architecture, sync logic, and the bugs that show up once it's in
+            production.</p>
           </div>
         </li>
         <li class="method-item reveal">
           <span class="method-item__num mono">02</span>
           <div>
-            <h3>Build in the open</h3>
-            <p>I work in short, visible increments — sharing progress builds early rather than disappearing for weeks, so direction can change while it's still cheap to change it.</p>
+            <h3>Offline-first, by default</h3>
+            <p>Field-operations software can't assume a signal. Every feature is designed
+            around what happens when the network isn't there, not treated as an edge case
+            afterwards.</p>
           </div>
         </li>
         <li class="method-item reveal">
           <span class="method-item__num mono">03</span>
           <div>
-            <h3>Ship and support</h3>
-            <p>Getting it live is the milestone, not the finish line — I stay on for fixes, updates, and the inevitable edge case that only shows up once real users touch it.</p>
+            <h3>Debug from the device, not the simulator</h3>
+            <p>The concurrency and sync issues that matter only show up with real data and real
+            background execution — most of my hardest bugs have been found and verified
+            on-device.</p>
+          </div>
+        </li>
+        <li class="method-item reveal">
+          <span class="method-item__num mono">04</span>
+          <div>
+            <h3>Keep building</h3>
+            <p>Front-end and back-end web day-to-day now, while continuing to ship and grow
+            native mobile apps alongside it.</p>
           </div>
         </li>
       </ol>
