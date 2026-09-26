@@ -1,10 +1,50 @@
 /* ===================================================================
    Liam Ramsden — portfolio behaviour
-   Sections: WebGL backdrop, cursor, scroll progress, title block,
-   dot nav, reveals, skill meters, contact copy.
+   Sections: theme toggle, WebGL backdrop, cursor, scroll progress,
+   title block, dot nav, reveals, skill meters, contact copy.
 =================================================================== */
 
 document.getElementById('year').textContent = new Date().getFullYear();
+
+/* ---------------------------------------------------------------
+   Theme (light/dark) — persisted per viewer, defaults to system
+   preference. Dispatches 'themechange' so the WebGL scenes below
+   can re-colour live without a reload.
+--------------------------------------------------------------- */
+const THEME_PALETTES = {
+  dark:  { line: 0x2C4C72, blue: 0x7DC1F2, accent: 0xFF6A55, good: 0x7ED9A6 },
+  light: { line: 0x9FBBD1, blue: 0x1D6FA5, accent: 0xD8442B, good: 0x1F9D6C }
+};
+
+function currentThemePalette(){
+  const theme = document.documentElement.dataset.theme === 'light' ? 'light' : 'dark';
+  return THEME_PALETTES[theme];
+}
+
+(function initTheme(){
+  let stored = null;
+  try { stored = localStorage.getItem('theme'); } catch (err) { /* ignore */ }
+  const prefersLight = window.matchMedia('(prefers-color-scheme: light)').matches;
+  const initial = stored || (prefersLight ? 'light' : 'dark');
+  document.documentElement.dataset.theme = initial;
+
+  const toggle = document.getElementById('themeToggle');
+  const label = document.getElementById('themeToggleLabel');
+  function updateLabel(theme){
+    if (label) label.textContent = theme === 'light' ? 'Light' : 'Dark';
+  }
+  updateLabel(initial);
+
+  if (toggle){
+    toggle.addEventListener('click', () => {
+      const next = document.documentElement.dataset.theme === 'light' ? 'dark' : 'light';
+      document.documentElement.dataset.theme = next;
+      try { localStorage.setItem('theme', next); } catch (err) { /* ignore */ }
+      updateLabel(next);
+      window.dispatchEvent(new CustomEvent('themechange'));
+    });
+  }
+})();
 
 /* ---------------------------------------------------------------
    WebGL backdrop — a drafting-grid corridor the camera flies
@@ -31,21 +71,33 @@ document.getElementById('year').textContent = new Date().getFullYear();
   const camera = new THREE.PerspectiveCamera(58, window.innerWidth / window.innerHeight, 0.1, 800);
   camera.position.set(0, 2, 30);
 
-  const LINE_COLOR = 0x2C4C72;
-  const AMBER = 0xFFB454;
-  const BLUE = 0x7DC1F2;
   const CORRIDOR_DEPTH = 360;
+  let palette = currentThemePalette();
+
+  // manually-built grids (rather than GridHelper) so their line colour
+  // can be updated live on theme change without rebuilding geometry
+  function makeGrid(size, divisions, color, opacity){
+    const half = size / 2;
+    const step = size / divisions;
+    const verts = [];
+    for (let i = 0; i <= divisions; i++){
+      const k = -half + i * step;
+      verts.push(-half, 0, k,  half, 0, k);
+      verts.push(k, 0, -half,  k, 0, half);
+    }
+    const geo = new THREE.BufferGeometry();
+    geo.setAttribute('position', new THREE.Float32BufferAttribute(verts, 3));
+    const mat = new THREE.LineBasicMaterial({ color, transparent: true, opacity });
+    return new THREE.LineSegments(geo, mat);
+  }
 
   // floor + ceiling grids, kept well clear of the text column vertically
-  const floor = new THREE.GridHelper(180, 24, LINE_COLOR, LINE_COLOR);
-  floor.position.y = -16;
-  floor.position.z = -CORRIDOR_DEPTH / 2;
-  floor.material.transparent = true;
-  floor.material.opacity = 0.5;
+  const floor = makeGrid(180, 24, palette.line, 0.5);
+  floor.position.set(0, -16, -CORRIDOR_DEPTH / 2);
   scene.add(floor);
 
-  const ceiling = floor.clone();
-  ceiling.position.y = 16;
+  const ceiling = makeGrid(180, 24, palette.line, 0.5);
+  ceiling.position.set(0, 16, -CORRIDOR_DEPTH / 2);
   scene.add(ceiling);
 
   // floating wireframe nodes drifting along the corridor
@@ -53,8 +105,8 @@ document.getElementById('year').textContent = new Date().getFullYear();
   const nodes = [];
   const NODE_COUNT = 18;
   for (let i = 0; i < NODE_COUNT; i++){
-    const color = i % 2 === 0 ? AMBER : BLUE;
-    const mat = new THREE.MeshBasicMaterial({ color, wireframe: true, transparent: true, opacity: 0.6 });
+    const isAccent = i % 2 === 0;
+    const mat = new THREE.MeshBasicMaterial({ color: isAccent ? palette.accent : palette.blue, wireframe: true, transparent: true, opacity: 0.6 });
     const mesh = new THREE.Mesh(nodeGeo, mat);
     mesh.position.set(
       (Math.random() - 0.5) * 34,
@@ -63,9 +115,17 @@ document.getElementById('year').textContent = new Date().getFullYear();
     );
     mesh.scale.setScalar(0.6 + Math.random() * 1.1);
     mesh.userData.spin = (Math.random() - 0.5) * 0.01;
+    mesh.userData.isAccent = isAccent;
     scene.add(mesh);
     nodes.push(mesh);
   }
+
+  window.addEventListener('themechange', () => {
+    palette = currentThemePalette();
+    floor.material.color.setHex(palette.line);
+    ceiling.material.color.setHex(palette.line);
+    nodes.forEach((n) => n.material.color.setHex(n.userData.isAccent ? palette.accent : palette.blue));
+  });
 
   let mouseX = 0, mouseY = 0;
   window.addEventListener('mousemove', (e) => {
@@ -141,57 +201,64 @@ document.getElementById('year').textContent = new Date().getFullYear();
   camera.position.set(0, 1.6, 9);
   camera.lookAt(0, 0, 0);
 
-  const AMBER = 0xFFB454, BLUE = 0x7DC1F2, GOOD = 0x7ED9A6, LINE = 0x2C4C72;
+  let palette = currentThemePalette();
   const START_X = -4.2, GATE_X = 0.6, END_X = 4.6;
 
-  [0.9, -0.9].forEach((y) => {
+  const trackMats = [0.9, -0.9].map((y) => {
     const geo = new THREE.BufferGeometry().setFromPoints([
       new THREE.Vector3(START_X, y, 0),
       new THREE.Vector3(END_X, y, 0)
     ]);
-    const mat = new THREE.LineBasicMaterial({ color: LINE, transparent: true, opacity: 0.6 });
+    const mat = new THREE.LineBasicMaterial({ color: palette.line, transparent: true, opacity: 0.6 });
     scene.add(new THREE.Line(geo, mat));
+    return mat;
   });
 
   const gateGeo = new THREE.PlaneGeometry(0.06, 2.4);
-  const gateMat = new THREE.MeshBasicMaterial({ color: GOOD, transparent: true, opacity: 0.18, side: THREE.DoubleSide });
+  const gateMat = new THREE.MeshBasicMaterial({ color: palette.good, transparent: true, opacity: 0.18, side: THREE.DoubleSide });
   const gatePlane = new THREE.Mesh(gateGeo, gateMat);
   gatePlane.position.set(GATE_X, 0, 0);
   scene.add(gatePlane);
   const gateEdges = new THREE.LineSegments(
     new THREE.EdgesGeometry(gateGeo),
-    new THREE.LineBasicMaterial({ color: GOOD })
+    new THREE.LineBasicMaterial({ color: palette.good })
   );
   gateEdges.position.copy(gatePlane.position);
   scene.add(gateEdges);
 
-  const store = new THREE.Mesh(
-    new THREE.BoxGeometry(0.9, 0.9, 0.9),
-    new THREE.MeshBasicMaterial({ color: LINE, wireframe: true })
-  );
+  const storeMat = new THREE.MeshBasicMaterial({ color: palette.line, wireframe: true });
+  const store = new THREE.Mesh(new THREE.BoxGeometry(0.9, 0.9, 0.9), storeMat);
   store.position.set(END_X + 0.4, 0, 0);
   scene.add(store);
 
   function makeToken(color){
-    const mesh = new THREE.Mesh(
-      new THREE.IcosahedronGeometry(0.32, 0),
-      new THREE.MeshBasicMaterial({ color, wireframe: true })
-    );
-    const glow = new THREE.Mesh(
-      new THREE.SphereGeometry(0.42, 12, 12),
-      new THREE.MeshBasicMaterial({ color, transparent: true, opacity: 0.15 })
-    );
+    const mat = new THREE.MeshBasicMaterial({ color, wireframe: true });
+    const mesh = new THREE.Mesh(new THREE.IcosahedronGeometry(0.32, 0), mat);
+    const glowMat = new THREE.MeshBasicMaterial({ color, transparent: true, opacity: 0.15 });
+    const glow = new THREE.Mesh(new THREE.SphereGeometry(0.42, 12, 12), glowMat);
     mesh.add(glow);
-    return mesh;
+    return { mesh, mat, glowMat };
   }
 
-  const tokenFg = makeToken(AMBER);
+  const fgToken = makeToken(palette.accent);
+  const tokenFg = fgToken.mesh;
   tokenFg.position.set(START_X, 0.9, 0);
   scene.add(tokenFg);
 
-  const tokenBg = makeToken(BLUE);
+  const bgToken = makeToken(palette.blue);
+  const tokenBg = bgToken.mesh;
   tokenBg.position.set(START_X, -0.9, 0);
   scene.add(tokenBg);
+
+  window.addEventListener('themechange', () => {
+    palette = currentThemePalette();
+    trackMats.forEach((m) => m.color.setHex(palette.line));
+    storeMat.color.setHex(palette.line);
+    fgToken.mat.color.setHex(palette.accent);
+    fgToken.glowMat.color.setHex(palette.accent);
+    bgToken.mat.color.setHex(palette.blue);
+    bgToken.glowMat.color.setHex(palette.blue);
+  });
 
   function resize(){
     const w = canvas.clientWidth, h = canvas.clientHeight;
@@ -253,8 +320,8 @@ document.getElementById('year').textContent = new Date().getFullYear();
 
     const pulse = bgWaiting ? 0.35 + Math.sin(ts * 0.006) * 0.12 : 0.18;
     gateMat.opacity = pulse;
-    gateMat.color.set(bgWaiting ? AMBER : GOOD);
-    gateEdges.material.color.set(bgWaiting ? AMBER : GOOD);
+    gateMat.color.setHex(bgWaiting ? palette.accent : palette.good);
+    gateEdges.material.color.setHex(bgWaiting ? palette.accent : palette.good);
 
     renderer.render(scene, camera);
   }
