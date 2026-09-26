@@ -143,7 +143,7 @@ document.getElementById('year').textContent = new Date().getFullYear();
   }
   loop();
 
-  document.querySelectorAll('a, button, .meter, .case').forEach(el => {
+  document.querySelectorAll('a, button, .skill-tags li, .case').forEach(el => {
     el.addEventListener('mouseenter', () => ring.classList.add('is-hover'));
     el.addEventListener('mouseleave', () => ring.classList.remove('is-hover'));
   });
@@ -210,27 +210,6 @@ document.getElementById('year').textContent = new Date().getFullYear();
   }, { threshold: 0.15 });
 
   items.forEach(el => observer.observe(el));
-})();
-
-/* ---------------------------------------------------------------
-   Skill meters — fill width on scroll into view
---------------------------------------------------------------- */
-(function initMeters(){
-  const meters = document.querySelectorAll('.meter');
-  if (!meters.length) return;
-
-  const observer = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-      if (entry.isIntersecting){
-        const fill = entry.target.querySelector('.meter__fill');
-        const value = entry.target.dataset.value;
-        if (fill) fill.style.width = value + '%';
-        observer.unobserve(entry.target);
-      }
-    });
-  }, { threshold: 0.4 });
-
-  meters.forEach(m => observer.observe(m));
 })();
 
 /* ---------------------------------------------------------------
